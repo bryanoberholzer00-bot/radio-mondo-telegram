@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🌍 Radio dal Mondo - Telegram Mini App</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    body { 
+      background: #202124; 
+      color: #fff; 
+      font-family: system-ui, sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      min-height: 100vh; 
+      box-sizing: border-box; 
+      display: flex; justify-content: center; align-items: center;
+    }
+    .container { 
+      background: #222; border-radius: 16px; padding: 22px 19px;
+      width: 370px; max-width: 94vw; box-shadow: 2px 6px 21px #10101083;
+    }
+    h2 {margin: 2px 0 17px 0; font-size: 1.41em;}
+    label {margin-top: 7px; margin-bottom: 9px; display: block;}
+    select, button, audio { width: 100%; margin: 14px 0; }
+    audio { background: #191919; border-radius: 6px;}
+    small { display:block; margin-top:19px; color: #98a; }
+    @media (max-width:400px) {
+      .container {width:99vw;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Radio dal Mondo<br><span style="font-size:0.87em;color:#98a">Mini-app Telegram</span></h2>
+    <label for="radio">Scegli una radio da ascoltare:</label>
+    <select id="radio">
+      <option value="https://stream.live.vc.bbcmedia.co.uk/bbc_world_service">BBC World Service (UK)</option>
+      <option value="http://stream.srg-ssr.ch/m/rsc_de/mp3_128">RSI Rete Uno (Svizzera)</option>
+      <option value="https://icestreaming.rai.it/1.mp3">Rai Radio 1 (Italia)</option>
+      <option value="https://npr-ice.streamguys1.com/live.mp3">NPR News (USA)</option>
+      <option value="http://icecast.vrtcdn.be/stubru-high.mp3">Studio Brussel (Belgio)</option>
+      <option value="https://radio3.rtve.es/radio3/mp3/stream.mp3">Radio 3 (Spagna)</option>
+      <option value="https://stream-dc1.radioparadise.com/mp3-192">Radio Paradise</option>
+      <option value="https://us4.internet-radio.com/proxy/seoul?mp=/stream">K-Pop (Korea)</option>
+      <option value="https://listen.181fm.com/181-beatles_128k.mp3">The Beatles Channel</option>
+      <option value="http://radio.garden/api/ara/content/listen/wWQbgbLZ/channel.mp3">Radio Rock (Italy)</option>
+    </select>
+    <audio id="player" controls autoplay style="margin-top:12px;" preload="none"></audio>
+    <script>
+      // Telegram mini app: adatta colore e comportamento
+      if (window.Telegram && Telegram.WebApp) {
+        Telegram.WebApp.expand();
+        Telegram.WebApp.ready();
+        document.body.style.background = Telegram.WebApp.backgroundColor || "#202124";
+      }
+      // Gestione player radio
+      const select = document.getElementById('radio');
+      const player = document.getElementById('player');
+      player.src = select.value;
+      select.addEventListener('change', () => { player.src = select.value; player.play(); });
+    </script>
+    <small>Apri questa web app direttamente dalla chat di Telegram tramite bot! Funziona anche da mobile. 👆</small>
+  </div>
+</body>
+</html>
